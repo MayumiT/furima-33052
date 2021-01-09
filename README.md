@@ -23,7 +23,7 @@
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| item_name     | string     | null: false                    |
+| name     　　　| string     | null: false                    |
 | image_id      | integer    | null: false                    |
 | text          | text       | null: false                    |
 | category_id   | integer    | null: false                    |
@@ -32,7 +32,7 @@
 | area_id       | integer    | null: false                    |
 | date_id       | integer    | null: false                    |
 | price         | integer    | null: false                    |
-| user_id       | references | foreign_key: true              |
+| user　　       | references | foreign_key: true              |
 
 ### Association
 
@@ -48,8 +48,8 @@
 
 | Column             | Type       | Options           |
 | ------------------ | ---------- | ----------------- |
-| user_id            | references | foreign_key: true |
-| item_id            | references | foreign_key: true |
+| user               | references | foreign_key: true |
+| item               | references | foreign_key: true |
 
 ### Association
 
@@ -61,14 +61,13 @@
 
 | Column             | Type       | Options           |
 | ------------------ | ---------- | ----------------- |
-| post_code          | strings    | null: false       |
+| post_code          | string     | null: false       |
 | prefecture_id      | integer    | null: false       |
-| city               | strings    | null: false       |
-| house_number       | strings    | null: false       |
-| building_name      | strings    | null: false       |
-| phone_number       | strings    | null: false       |
-| item_id            | references | foreign_key: true |
-| user_id            | references | foreign_key: true |
+| city               | string     | null: false       |
+| house_number       | string     | null: false       |
+| building_name      | string     |                   |
+| phone_number       | string     | null: false       |
+| buys               | references | foreign_key: true |
 
 ### Association
 
