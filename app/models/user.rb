@@ -7,10 +7,14 @@ class User < ApplicationRecord
   has_many :items
   with_options presence: true do
     validates :nickname
-    validates :family_name, format: { with: /\A[ぁ-んァ-ヶ一-龥]/ }
-    validates :first_name, format: { with: /\A[ぁ-んァ-ヶ一-龥]/ }
-    validates :family_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }
-    validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }
+    with_options format: { with: /\A[ぁ-んァ-ヶ一-龥]/ } do
+      validates :family_name
+      validates :first_name
+    end
+    with_options format: { with: /\A[ァ-ヶー－]+\z/ } do
+      validates :family_name_kana
+      validates :first_name_kana
+    end
     validates :birth
   end
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }
