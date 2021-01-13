@@ -7,15 +7,6 @@ RSpec.describe User, type: :model do
     end
 
     it '全ての値が正しく入力されると登録がうまくいく' do
-      @user.nickname = 'test'
-      @user.email = 'test@example'
-      @user.password = 'a00000'
-      @user.password_confirmation = 'a00000'
-      @user.family_name = '山田'
-      @user.family_name_kana = 'ヤマダ'
-      @user.first_name = '太郎'
-      @user.first_name_kana = 'タロウ'
-      @user.birth = '2000-01-01'
       expect(@user).to be_valid
     end
 
