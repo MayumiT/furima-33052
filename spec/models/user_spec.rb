@@ -6,6 +6,19 @@ RSpec.describe User, type: :model do
       @user = FactoryBot.build(:user)
     end
 
+    it '全ての値が正しく入力されると登録がうまくいく' do
+      @user.nickname = 'test'
+      @user.email = 'test@example'
+      @user.password = 'a00000'
+      @user.password_confirmation = 'a00000'
+      @user.family_name = '山田'
+      @user.family_name_kana = 'ヤマダ'
+      @user.first_name = '太郎'
+      @user.first_name_kana = 'タロウ'
+      @user.birth = '2000-01-01'
+      expect(@user).to be_valid
+    end
+
     it 'nicknameが空だと登録できない' do
       @user.nickname = ''
       @user.valid?
@@ -23,9 +36,9 @@ RSpec.describe User, type: :model do
       another_user.valid?
     end
     it 'メールアドレスは、@を含む必要があること' do
-      @user.email = include('@')
+      @user.email = 'test.example'
       @user.valid?
-      expect(@user.errors.full_messages).to include('Email is invalid')
+      expect(@user.errors.full_messages).to include("Email is invalid")
     end
     it 'パスワードが必須であること' do
       @user.password = ''
@@ -38,10 +51,23 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
     end
-    it 'パスワードは、半角英数字混合での入力が必須であること' do
-      @user.password = !'ab12'
+    it 'パスワードは、半角英字のみでは登録できない' do
+      @user.password = 'abcdef'
+      @user.password_confirmation = @user.password
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password can't be blank")
+      expect(@user.errors.full_messages).to include("Password is invalid")
+    end
+    it 'パスワードは、半角数字のみでは登録できない' do
+      @user.password = '123456'
+      @user.password_confirmation = @user.password
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
+    end
+    it 'パスワードは、全角では登録できない' do
+      @user.password = 'A１２３４５'
+      @user.password_confirmation = @user.password
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
     end
     it 'パスワードは、確認用を含めて2回入力すること' do
       @user.password_confirmation = ''
