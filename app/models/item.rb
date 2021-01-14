@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   has_one_active_hash :prefecture
   has_one_active_hash :area
   has_one_active_hash :date
+  has_one_attached :image
 
   with_options presence: true do
     validates :name
@@ -17,5 +18,6 @@ class Item < ApplicationRecord
     validates :area_id
     validates :date_id
     validates :price
+    validates :image
   end
 end
