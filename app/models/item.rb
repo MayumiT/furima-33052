@@ -2,11 +2,13 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one :buy
-  has_one_active_hash :category
-  has_one_active_hash :condition
-  has_one_active_hash :prefecture
-  has_one_active_hash :area
-  has_one_active_hash :date
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :prefecture
+  belongs_to :area
+  belongs_to :date
   has_one_attached :image
 
   with_options presence: true do
