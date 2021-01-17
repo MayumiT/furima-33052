@@ -29,19 +29,20 @@
 | condition_id  | integer    | null: false                    |
 | prefecture_id | integer    | null: false                    |
 | area_id       | integer    | null: false                    |
-| date_id       | integer    | null: false                    |
+| day_id        | integer    | null: false                    |
 | price         | integer    | null: false                    |
-| user　　       | references | foreign_key: true              |
+| user          | references | foreign_key: true              |
 
 ### Association
 
 - belongs_to :user
 - has_one :buy
-- has_one_active_hash :category
-- has_one_active_hash :condition
-- has_one_active_hash :prefecture
-- has_one_active_hash :area
-- has_one_active_hash :date
+- has_one_attached :image
+- belongs_to_active_hash :category
+- belongs_to_active_hash :condition
+- belongs_to_active_hash :prefecture
+- belongs_to_active_hash :area
+- belongs_to_active_hash :day
 
 ## buys テーブル
 
@@ -71,4 +72,4 @@
 ### Association
 
 - belongs_to :buy
-- has_one_active_hash :prefecture
+- belongs_to_active_hash :prefecture
