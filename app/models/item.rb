@@ -18,7 +18,7 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :area_id
     validates :day_id
-    validates :price
+    validates :price, format: { with: /\A[0-9]+\z/ }, numericality: { only_integer: true, greater_than: 299, less_than: 10000000 }
     validates :image
   end
   validates :category_id, numericality: { other_than: 1 }
