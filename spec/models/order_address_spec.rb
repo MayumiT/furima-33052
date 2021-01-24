@@ -12,9 +12,13 @@ RSpec.describe OrderAddress, type: :model do
       it '必要な情報を適切に入力すると、商品の購入ができる' do
         expect(@order_address).to be_valid
       end
+      it '建物名がなくても、商品の購入ができる' do
+        @order_address.building_name = ""
+        expect(@order_address).to be_valid
+      end
     end 
     
-    context 'できない時' do
+    context '商品の購入ができない時' do
       it '郵便番号が空では、商品の購入ができない' do
         @order_address.post_code = ""
         @order_address.valid?
@@ -24,6 +28,11 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.area_id = ""
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Area can't be blank")
+      end
+      it '都道府県が未選択では商品の購入ができない' do
+        @order_address.area_id = 1
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Area must be other than 1")
       end
       it '市区町村が空では、商品の購入ができない' do
         @order_address.city = ""
