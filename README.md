@@ -17,7 +17,7 @@
 ### Association
 
 - has_many :items
-- has_many :buys
+- has_many :orders
 
 ## items テーブル
 
@@ -36,7 +36,7 @@
 ### Association
 
 - belongs_to :user
-- has_one :buy
+- has_one :order
 - has_one_attached :image
 - belongs_to_active_hash :category
 - belongs_to_active_hash :condition
@@ -44,7 +44,7 @@
 - belongs_to_active_hash :area
 - belongs_to_active_hash :day
 
-## buys テーブル
+## orders テーブル
 
 | Column             | Type       | Options           |
 | ------------------ | ---------- | ----------------- |
@@ -62,14 +62,14 @@
 | Column             | Type       | Options           |
 | ------------------ | ---------- | ----------------- |
 | post_code          | string     | null: false       |
-| prefecture_id      | integer    | null: false       |
+| area_id            | integer    | null: false       |
 | city               | string     | null: false       |
 | house_number       | string     | null: false       |
 | building_name      | string     |                   |
 | phone_number       | string     | null: false       |
-| buy                | references | foreign_key: true |
+| order              | references | foreign_key: true |
 
 ### Association
 
-- belongs_to :buy
-- belongs_to_active_hash :prefecture
+- belongs_to :order
+- belongs_to_active_hash :area
